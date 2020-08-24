@@ -24,11 +24,13 @@ dependencies {
     // This dependency is found on compile classpath of this component and consumers.
 // https://mvnrepository.com/artifact/com.kenshoo/persistence-layer
     compile group: 'com.kenshoo', name: 'persistence-layer', version: '0.1.51-jooq-3.10.4'
-    
+    testCompile group: 'org.hamcrest', name: 'hamcrest-library', version: '1.3'
+
     implementation 'com.google.guava:guava:27.0.1-jre'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+
 }
 
 // Define the main class for the application
