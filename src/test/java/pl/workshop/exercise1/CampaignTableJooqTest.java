@@ -9,9 +9,10 @@ import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static pl.workshop.campaign.CampaignType.ECOM;
 
 
-public class TestJooq {
+public class CampaignTableJooqTest {
 
     private final CampaignTable CAMPAIGNS = CampaignTable.INSTANCE;
     private final DSLContext jooq = JooqProvider.create();
@@ -50,7 +51,7 @@ public class TestJooq {
         //
         Map<String, String> nameToType = null; // TODO:  jooq.select(...)
 
-        assertThat(nameToType.get("my campaign"), is("ECOM"));
+        assertThat(nameToType.get("Tablets in USA"), is(ECOM.name()));
     }
 
 

@@ -20,7 +20,7 @@ public class CampaignEntity extends AbstractEntityType<CampaignEntity> {
     // TODO: add more fields in here.
     //
     public final static EntityField<CampaignEntity, String> NAME = INSTANCE.field(CampaignTable.name);
-    public final static EntityField<CampaignEntity, CampaignType> TYPE = null; // TODO: define field using EnumAsStringValueConverter
+    public final static EntityField<CampaignEntity, CampaignType> TYPE = null; // TODO: define field type as enum by using EnumAsStringValueConverter
     // public final static EntityField<CampaignEntity, ...> REPLACE_ME_1 = ...;
     // public final static EntityField<CampaignEntity, ...> REPLACE_ME_2 = ...;
 
