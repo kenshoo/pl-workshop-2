@@ -3,10 +3,8 @@ package pl.workshop.exercise1;
 import com.kenshoo.jooq.DataTableUtils;
 import org.jooq.DSLContext;
 import org.junit.Test;
-import pl.workshop.CampaignTable;
+import pl.workshop.campaign.CampaignTable;
 import pl.workshop.database.JooqProvider;
-
-import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -22,7 +20,7 @@ public class TestJooq {
     public void testThatYouCanDefineCampaignTableFields() {
 
         //
-        // TODO: add more table fields to class CampaignTable.
+        // TODO: go to class CampaignTable to define the expected table fields.
         //
 
         DataTableUtils.createTable(jooq, CAMPAIGNS);
@@ -32,6 +30,7 @@ public class TestJooq {
         assertThat(fields.get("id").get("Type"), is("int(11)"));
         assertThat(fields.get("id").get("Key"), is("PRI"));
         assertThat(fields.get("id").get("Extra"), is("auto_increment"));
+        assertThat(fields.get("publisher_id").get("Type"), is("int(11)"));
         assertThat(fields.get("name").get("Type"), is("varchar(20)"));
         assertThat(fields.get("type").get("Type"), is("varchar(20)"));
     }
@@ -41,13 +40,13 @@ public class TestJooq {
         DataTableUtils.createTable(jooq, CAMPAIGNS);
 
         //
-        // TODO: insert with jooq campaign with name "my campaign" and type "ECOM"
+        // TODO: use jooq to insert a new campaign with name "my campaign" and type "ECOM"
         //
 
         // jooq.insertInto(...) ...
 
         //
-        // TODO: select with jooq campaign name and type into a map.
+        // TODO: use jooq to fetch campaigns name and type into a map.
         //
         Map<String, String> nameToType = null; // TODO:  jooq.select(...)
 
