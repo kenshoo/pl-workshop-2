@@ -24,5 +24,4 @@ public class CampaignEntity extends AbstractEntityType<CampaignEntity> {
     // public final static EntityField<CampaignEntity, ...> REPLACE_ME_1 = ...;
     // public final static EntityField<CampaignEntity, ...> REPLACE_ME_2 = ...;
 
-
 }

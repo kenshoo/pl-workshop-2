@@ -47,7 +47,7 @@ public class CampaignEntityAndQueryTest {
             plContext
                 .select(... the fields  ...)
                 .from  (... entity type ...)
-                .where (... condition   ...)
+                .where (CampaignEntity.ID.eq(1))
                 .fetch ();
         */
 
