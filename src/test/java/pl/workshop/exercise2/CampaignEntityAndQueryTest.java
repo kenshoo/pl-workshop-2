@@ -29,7 +29,7 @@ public class CampaignEntityAndQueryTest {
 
         final Object[][] DATA = {
              // +------+--------------+-----------+----------+
-             // | id   | publisher_id | name      |  type    |
+             // | id   | account_id   | name      |  type    |
              // +------+--------------+-----------+----------+
                 {  1   ,  1           , "shoes"   , "SEARCH" },
                 {  2   ,  1           , "shirts"  , "SEARCH" },

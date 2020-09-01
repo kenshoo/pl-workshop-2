@@ -31,7 +31,7 @@ public class CampaignTableJooqTest {
         assertThat(fields.get("id").get("Type"), is("int(11)"));
         assertThat(fields.get("id").get("Key"), is("PRI"));
         assertThat(fields.get("id").get("Extra"), is("auto_increment"));
-        assertThat(fields.get("publisher_id").get("Type"), is("int(11)"));
+        assertThat(fields.get("account_id").get("Type"), is("int(11)"));
         assertThat(fields.get("name").get("Type"), is("varchar(20)"));
         assertThat(fields.get("type").get("Type"), is("varchar(20)"));
     }
