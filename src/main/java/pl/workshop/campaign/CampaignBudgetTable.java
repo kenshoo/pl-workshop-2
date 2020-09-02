@@ -18,7 +18,8 @@ public class CampaignBudgetTable extends AbstractDataTable<CampaignBudgetTable> 
     // TODO: define fields.
     //
     // Field campaign_id should be defined as a Foreign Key (FK) to the campaign table
-    // by using method createFKField instead of using createField.
+    // and Primary Key (PK) to the budget table..
+    // Do this by using method createPKAndFKField instead of using createField.
     //
     // public final static TableField<Record, ...> campaign_id = ...
     // public final static TableField<Record, ...> daily_budget = ...
