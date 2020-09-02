@@ -67,17 +67,17 @@ public class PersistCampaignsUsingPLTest {
         var command1 = new CreateEntityCommand<>(CampaignEntity.INSTANCE);
         var command2 = new CreateEntityCommand<>(CampaignEntity.INSTANCE);
 
-        /* TODO: [2] populate with values
-        command1.set(...);
-        command1.set(...);
-        command1.set(...);
-        command1.set(...);
+//         TODO: [2] populate with values
 
-        command2.set(...);
-        command2.set(...);
-        command2.set(...);
-        command2.set(...);
-        */
+        command1.set(ACCOUNT_ID, 1);
+        command1.set(TYPE, SEARCH);
+        command1.set(DAILY_BUDGET, 400);
+        command1.set(NAME, "TV Japan");
+
+        command2.set(ACCOUNT_ID, 1);
+        command2.set(TYPE, SEARCH);
+        command2.set(DAILY_BUDGET, 1600);
+        command2.set(NAME, "TV Dublin");
 
         campaignPL.create(List.of(command1, command2));
 
