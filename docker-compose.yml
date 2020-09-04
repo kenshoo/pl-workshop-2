@@ -1,0 +1,11 @@
+version: '2'
+services:
+  mysql:
+    container_name: app_db
+    ports:
+      - "3306:3306"
+    image: "mysql:5.6.36"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root56
+      - TZ=UTC
+

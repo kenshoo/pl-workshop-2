@@ -11,7 +11,6 @@ public class CheckDatabaseConnection {
     static final DSLContext jooq = JooqProvider.create();
 
     @Test public void selectOne() {
-        jooq.createSchemaIfNotExists("test");
         System.out.println(jooq.fetch("select now()").get(0));
     }
 }
