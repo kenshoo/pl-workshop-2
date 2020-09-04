@@ -26,7 +26,7 @@ public class CampaignTableJooqTest {
 
         DataTableUtils.createTable(jooq, CAMPAIGNS);
 
-        var fields = jooq.fetch("desc CAMPAIGNS").intoMap("Field");
+        var fields = jooq.fetch("desc " + CAMPAIGNS.getName()).intoMap("Field");
 
         assertThat(fields.get("id").get("Type"), is("int(11)"));
         assertThat(fields.get("id").get("Key"), is("PRI"));
@@ -41,7 +41,7 @@ public class CampaignTableJooqTest {
         DataTableUtils.createTable(jooq, CAMPAIGNS);
 
         //
-        // TODO: use jooq to insert a new campaign with name "my campaign" and type "ECOM"
+        // TODO: use jooq to insert a new campaign with name "Tablets in USA" and type "ECOM"
         //
 
         // jooq.insertInto(...) ...
