@@ -55,7 +55,7 @@ public class CampaignEntityAndQueryTest {
 
         // TODO: uncomment these lines
         // assertThat(first(campaigns).get(CampaignEntity.ID), is(1));
-        // assertThat(first(campaigns).get(CampaignEntity.PUBLISHER_ID), is(1));
+        // assertThat(first(campaigns).get(CampaignEntity.ACCOUNT_ID), is(1));
         // assertThat(first(campaigns).get(CampaignEntity.TYPE), is(SEARCH));
     }
 
