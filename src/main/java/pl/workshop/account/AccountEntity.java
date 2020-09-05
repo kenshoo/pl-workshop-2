@@ -19,6 +19,6 @@ public class AccountEntity extends AbstractEntityType<AccountEntity> {
     //
     // public final static EntityField<AccountEntity, ...> ID = ...
     // public final static EntityField<AccountEntity, AccountStatus> STATUS = ... // TODO: define field type as enum by using EnumAsStringValueConverter
-    // public final static EntityField<CampaignEntity, ...> REPLACE_ME_1 = ...;
+    // public final static EntityField<AccountEntity, ...> REPLACE_ME_1 = ...;
 
 }

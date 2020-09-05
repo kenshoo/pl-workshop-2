@@ -58,7 +58,8 @@ public class FetchCampaignAndAccountInSameQueryTest {
     public void testFetchingCampaignNameAndAccountUserName() {
 
         // TODO: [1] go to class AccountTable and define the table fields.
-        // TODO: [2] go to class CampaignTable and modify field `account_id` to be a foreign key (FK) to the accounts by using 'createFKField'.
+        // TODO: [2] go to class AccountEntity and define the entity fields.
+        // TODO: [3] go to class CampaignTable and modify field `account_id` to be a foreign key (FK) to the accounts by using 'createFKField'.
 
         List<CurrentEntityState> campaigns = null; /* TODO: [3] replace 'null' with the query:
         /*
