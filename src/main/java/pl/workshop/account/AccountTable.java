@@ -1,6 +1,9 @@
 package pl.workshop.account;
 
 import com.kenshoo.jooq.AbstractDataTable;
+import org.jooq.Record;
+import org.jooq.TableField;
+import org.jooq.impl.SQLDataType;
 
 public class AccountTable extends AbstractDataTable<AccountTable> {
 
@@ -16,8 +19,8 @@ public class AccountTable extends AbstractDataTable<AccountTable> {
     //
     // Field 'id' should be defined as a Primary Key (PK) by using method createPKField rather than createField.
     //
-    // public final static TableField<Record, ...> id = ...
-    // public final static TableField<Record, ...> user_name = ...
-    // public final static TableField<Record, ...> status = ...
+     public final static TableField<Record, Integer> id = INSTANCE.createPKField("id", SQLDataType.INTEGER);
+     public final static TableField<Record, String> user_name = INSTANCE.createField("user_name", SQLDataType.VARCHAR(50));
+     public final static TableField<Record, String> status = INSTANCE.createField("status", SQLDataType.VARCHAR(50));
 
 }

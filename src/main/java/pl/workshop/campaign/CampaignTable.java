@@ -4,6 +4,7 @@ import com.kenshoo.jooq.AbstractDataTable;
 import org.jooq.Record;
 import org.jooq.TableField;
 import org.jooq.impl.SQLDataType;
+import pl.workshop.account.AccountTable;
 
 public class CampaignTable extends AbstractDataTable<CampaignTable> {
 
@@ -22,9 +23,9 @@ public class CampaignTable extends AbstractDataTable<CampaignTable> {
     // Auto increment is defined by calling `identity(true)` on the SQLDataType of the field.
     //
     //
-    // public final static TableField<Record, ...> id = ...
-    // public final static TableField<Record, ...> account_id = ...
-    public final static TableField<Record, String> name = INSTANCE.createField("name", SQLDataType.VARCHAR(20));
-    // public final static TableField<Record, ...> type = ...
+     public final static TableField<Record, Integer> id = INSTANCE.createPKField("id", SQLDataType.INTEGER.identity(true));
+     public final static TableField<Record, Integer> account_id = INSTANCE.createFKField("account_id", AccountTable.id);
+     public final static TableField<Record, String> name = INSTANCE.createField("name", SQLDataType.VARCHAR(20));
+     public final static TableField<Record, String> type = INSTANCE.createField("type", SQLDataType.VARCHAR(20));
 
 }

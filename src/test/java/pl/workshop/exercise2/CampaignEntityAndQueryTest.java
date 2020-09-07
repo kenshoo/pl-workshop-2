@@ -9,6 +9,7 @@ import org.junit.Test;
 import pl.workshop.campaign.CampaignEntity;
 import pl.workshop.campaign.CampaignTable;
 import pl.workshop.database.JooqProvider;
+
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,11 +29,11 @@ public class CampaignEntityAndQueryTest {
         DataTableUtils.createTable(jooq, CAMPAIGNS);
 
         final Object[][] DATA = {
-             // +------+--------------+-----------+----------+
-             // | id   | account_id   | name      |  type    |
-             // +------+--------------+-----------+----------+
-                {  1   ,  1           , "shoes"   , "SEARCH" },
-                {  2   ,  1           , "shirts"  , "SEARCH" },
+                // +------+--------------+-----------+----------+
+                // | id   | account_id   | name      |  type    |
+                // +------+--------------+-----------+----------+
+                {1, 1, "shoes", "SEARCH"},
+                {2, 1, "shirts", "SEARCH"},
         };
 
         DataTableUtils.populateTable(jooq, CAMPAIGNS, DATA);
@@ -43,20 +44,19 @@ public class CampaignEntityAndQueryTest {
 
         // TODO: [1] go to class CampaignEntity and define the entity fields.
 
-        List<CurrentEntityState> campaigns = null; /* TODO: [2] replace 'null' with the query:
-            plContext
-                .select(... the fields  ...)
-                .from  (... entity type ...)
-                .where (CampaignEntity.ID.eq(1))
-                .fetch ();
-        */
+        List<CurrentEntityState> campaigns = plContext
+                .select(CampaignEntity.ACCOUNT_ID, CampaignEntity.ID, CampaignEntity.NAME, CampaignEntity.TYPE)
+                .from(CampaignEntity.INSTANCE)
+                .where(CampaignEntity.ID.eq(1))
+                .fetch();
+
 
         assertThat(first(campaigns).get(CampaignEntity.NAME), is("shoes"));
 
         // TODO: uncomment these lines
-        // assertThat(first(campaigns).get(CampaignEntity.ID), is(1));
-        // assertThat(first(campaigns).get(CampaignEntity.ACCOUNT_ID), is(1));
-        // assertThat(first(campaigns).get(CampaignEntity.TYPE), is(SEARCH));
+         assertThat(first(campaigns).get(CampaignEntity.ID), is(1));
+         assertThat(first(campaigns).get(CampaignEntity.ACCOUNT_ID), is(1));
+         assertThat(first(campaigns).get(CampaignEntity.TYPE), is(SEARCH));
     }
 
 
