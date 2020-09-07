@@ -46,7 +46,7 @@ public class CampaignWithSecondaryBudgetTableTest {
 
         final Object[][] DATA = {
              // +---------------+--------------+-----------------+
-             // | campaign_id   | daily_budget | monthly_budget  |
+             // | campaign_id   | DAILY_BUDGET | monthly_budget  |
              // +---------------+--------------+-----------------+
                 {    1          ,  1000        ,  30000          },
                 {    2          ,  4000        ,  40000          },
@@ -62,17 +62,16 @@ public class CampaignWithSecondaryBudgetTableTest {
         // TODO: [1] go to class CampaignBudgetTable and define the table fields.
         // TODO: [2] go to class CampaignEntity and define the budget fields in there by referring the budget table.
 
-        List<CurrentEntityState> campaigns = null; /* TODO: [3] replace 'null' with the query:
+        List<CurrentEntityState> campaigns =
             plContext
-                .select(... the fields  ...)
-                .from  (... entity type ...)
-                .where (... condition   ...)
+                .select(CampaignEntity.DAILY_BUDGET, CampaignEntity.MONTHLY_BUDGET)
+                .from  (CampaignEntity.INSTANCE)
+                .where (CampaignEntity.ID.eq(1))
                 .fetch ();
-        */
 
         // TODO: uncomment these lines
-        // assertThat(first(campaigns).get(CampaignEntity.DAILY_BUDGET), is(1000));
-        // assertThat(first(campaigns).get(CampaignEntity.MONTHLY_BUDGET), is(30000));
+         assertThat(first(campaigns).get(CampaignEntity.DAILY_BUDGET), is(1000));
+         assertThat(first(campaigns).get(CampaignEntity.MONTHLY_BUDGET), is(30000));
     }
 
 

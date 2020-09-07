@@ -2,6 +2,8 @@ package pl.workshop.account;
 
 import com.kenshoo.jooq.DataTable;
 import com.kenshoo.pl.entity.AbstractEntityType;
+import com.kenshoo.pl.entity.EntityField;
+import com.kenshoo.pl.entity.converters.EnumAsStringValueConverter;
 
 
 public class AccountEntity extends AbstractEntityType<AccountEntity> {
@@ -17,8 +19,8 @@ public class AccountEntity extends AbstractEntityType<AccountEntity> {
     //
     // TODO: add more fields in here.
     //
-    // public final static EntityField<AccountEntity, ...> ID = ...
-    // public final static EntityField<AccountEntity, AccountStatus> STATUS = ... // TODO: define field type as enum by using EnumAsStringValueConverter
-    // public final static EntityField<AccountEntity, ...> REPLACE_ME_1 = ...;
+     public final static EntityField<AccountEntity, Integer> ID = INSTANCE.field(AccountTable.id);
+     public final static EntityField<AccountEntity, AccountStatus> STATUS = INSTANCE.field(AccountTable.status, new EnumAsStringValueConverter<>(AccountStatus.class)); // TODO: define field type as enum by using EnumAsStringValueConverter
+     public final static EntityField<AccountEntity, String> USER_NAME = INSTANCE.field(AccountTable.user_name);
 
 }

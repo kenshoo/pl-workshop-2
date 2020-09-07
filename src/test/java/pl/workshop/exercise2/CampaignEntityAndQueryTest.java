@@ -43,20 +43,19 @@ public class CampaignEntityAndQueryTest {
 
         // TODO: [1] go to class CampaignEntity and define the entity fields.
 
-        List<CurrentEntityState> campaigns = null; /* TODO: [2] replace 'null' with the query:
+        List<CurrentEntityState> campaigns =  //TODO: [2] replace 'null' with the query:
             plContext
-                .select(... the fields  ...)
-                .from  (... entity type ...)
+                .select(CampaignEntity.NAME, CampaignEntity.TYPE, CampaignEntity.ACCOUNT_ID, CampaignEntity.ID)
+                .from  (CampaignEntity.INSTANCE)
                 .where (CampaignEntity.ID.eq(1))
                 .fetch ();
-        */
 
         assertThat(first(campaigns).get(CampaignEntity.NAME), is("shoes"));
 
         // TODO: uncomment these lines
-        // assertThat(first(campaigns).get(CampaignEntity.ID), is(1));
-        // assertThat(first(campaigns).get(CampaignEntity.ACCOUNT_ID), is(1));
-        // assertThat(first(campaigns).get(CampaignEntity.TYPE), is(SEARCH));
+         assertThat(first(campaigns).get(CampaignEntity.ID), is(1));
+         assertThat(first(campaigns).get(CampaignEntity.ACCOUNT_ID), is(1));
+         assertThat(first(campaigns).get(CampaignEntity.TYPE), is(SEARCH));
     }
 
 

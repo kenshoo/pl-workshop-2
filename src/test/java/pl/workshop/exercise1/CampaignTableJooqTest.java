@@ -44,12 +44,17 @@ public class CampaignTableJooqTest {
         // TODO: use jooq to insert a new campaign with name "Tablets in USA" and type "ECOM"
         //
 
-        // jooq.insertInto(...) ...
+         jooq.insertInto(CAMPAIGNS)
+                 .set(CampaignTable.name, "Tablets in USA")
+                 .set(CampaignTable.type, ECOM.name())
+                 .execute();
 
         //
         // TODO: use jooq to fetch campaigns name and type into a map.
         //
-        Map<String, String> nameToType = null; // TODO:  jooq.select(...)
+        Map<String, String> nameToType = jooq.select(CampaignTable.name, CampaignTable.type)
+                .from(CAMPAIGNS)
+                .fetchMap(CampaignTable.name, CampaignTable.type); // TODO:  jooq.select(...)
 
         assertThat(nameToType.get("Tablets in USA"), is(ECOM.name()));
     }

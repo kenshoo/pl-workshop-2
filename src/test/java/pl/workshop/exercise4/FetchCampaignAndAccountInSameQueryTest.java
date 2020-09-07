@@ -6,6 +6,7 @@ import com.kenshoo.pl.entity.PLContext;
 import org.jooq.DSLContext;
 import org.junit.Before;
 import org.junit.Test;
+import pl.workshop.account.AccountEntity;
 import pl.workshop.account.AccountTable;
 import pl.workshop.campaign.*;
 import pl.workshop.database.JooqProvider;
@@ -61,32 +62,27 @@ public class FetchCampaignAndAccountInSameQueryTest {
         // TODO: [2] go to class AccountEntity and define the entity fields.
         // TODO: [3] go to class CampaignTable and modify field `account_id` to be a foreign key (FK) to the accounts by using 'createFKField'.
 
-        List<CurrentEntityState> campaigns = null; /* TODO: [3] replace 'null' with the query:
-        /*
-            plContext
-                .select(...)
-                .from  (...)
+        List<CurrentEntityState> campaigns = plContext
+                .select(CampaignEntity.NAME, AccountEntity.USER_NAME)
+                .from  (CampaignEntity.INSTANCE)
                 .where (CampaignEntity.ID.eq(1))
                 .fetch ();
-        */
 
         assertThat(first(campaigns).get(CampaignEntity.NAME), is("shoes"));
         // TODO: [3] uncomment this lines
-        //assertThat(first(campaigns).get(AccountEntity.USER_NAME), is("Joker"));
+        assertThat(first(campaigns).get(AccountEntity.USER_NAME), is("Joker"));
     }
 
 
     @Test
     public void testFetchingAccountWithManyCampaigns() {
 
-        List<CurrentEntityState> accounts = null; /* TODO: [1] replace 'null' with the query:
-        /*
+        List<CurrentEntityState> accounts =
                 plContext
-                        .select(... campaign name and account user name ...)
-                        .from  (... accounts ...)
-                        .where (... account id is 1 ...)
+                        .select(CampaignEntity.NAME, AccountEntity.USER_NAME)
+                        .from  (AccountEntity.INSTANCE)
+                        .where (AccountEntity.ID.eq(1))
                         .fetch ();
-        */
 
         // TODO: [2] uncomment this line
         // assertThat(first(accounts).get(AccountEntity.USER_NAME), is("Joker"));
