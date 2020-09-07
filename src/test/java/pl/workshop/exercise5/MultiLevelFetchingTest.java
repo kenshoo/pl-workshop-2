@@ -111,11 +111,16 @@ public class MultiLevelFetchingTest {
 
     @Test
     public void testFetchingAdgroupAlongWithOtherEntities() {
-        CurrentEntityState adgroup = null; // TODO: [1] use PL query
+        CurrentEntityState adgroup = plContext
+                .select(AccountEntity.USER_NAME, CampaignEntity.DAILY_BUDGET, DeviceEntity.DEVICE)
+                .from(CampaignEntity.INSTANCE)
+                .where(CampaignEntity.ID.eq(10))
+                .fetch()
+                .get(0); // TODO: [1] use PL query
 
         assertThat(adgroup.get(AccountEntity.USER_NAME), is("Joker"));
         assertThat(adgroup.get(CampaignEntity.DAILY_BUDGET), is(1000));
-        assertThat(null /* TODO: [2] get the fetched devices */, contains(MOBILE, DESKTOP));
+        assertThat(adgroup.getMany(DeviceEntity.INSTANCE).stream().map(d -> d.get(DeviceEntity.DEVICE)), contains(MOBILE, DESKTOP));
     }
 
 }
