@@ -20,6 +20,7 @@ import pl.workshop.database.JooqProvider;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
 import static pl.workshop.device.DeviceType.DESKTOP;
 import static pl.workshop.device.DeviceType.MOBILE;
@@ -42,10 +43,10 @@ public class MultiLevelFetchingTest {
         DataTableUtils.createTable(jooq, ACCOUNTS);
 
         final Object[][] DATA = {
-             // +------+--------------+-----------+
-             // | id   | user_name    | status    |
-             // +------+--------------+-----------+
-                {  1   ,  "Joker"     , "ACTIVE"  }
+                // +------+--------------+-----------+
+                // | id   | user_name    | status    |
+                // +------+--------------+-----------+
+                {1, "Joker", "ACTIVE"}
         };
 
         DataTableUtils.populateTable(jooq, ACCOUNTS, DATA);
@@ -56,10 +57,10 @@ public class MultiLevelFetchingTest {
         DataTableUtils.createTable(jooq, CAMPAIGNS);
 
         final Object[][] DATA = {
-             // +------+--------------+-----------+----------+
-             // | id   | account_id   | name      |  type    |
-             // +------+--------------+-----------+----------+
-                {  10  ,  1           , "shoes"   , "SEARCH" }
+                // +------+--------------+-----------+----------+
+                // | id   | account_id   | name      |  type    |
+                // +------+--------------+-----------+----------+
+                {10, 1, "shoes", "SEARCH"}
         };
 
         DataTableUtils.populateTable(jooq, CAMPAIGNS, DATA);
@@ -70,10 +71,10 @@ public class MultiLevelFetchingTest {
         DataTableUtils.createTable(jooq, BUDGETS);
 
         final Object[][] DATA = {
-             // +---------------+--------------+-----------------+
-             // | campaign_id   | daily_budget | monthly_budget  |
-             // +---------------+--------------+-----------------+
-                {    10         ,  1000        ,  30000          }
+                // +---------------+--------------+-----------------+
+                // | campaign_id   | daily_budget | monthly_budget  |
+                // +---------------+--------------+-----------------+
+                {10, 1000, 30000}
         };
 
         DataTableUtils.populateTable(jooq, BUDGETS, DATA);
@@ -84,11 +85,11 @@ public class MultiLevelFetchingTest {
         DataTableUtils.createTable(jooq, DEVICES);
 
         final Object[][] DATA = {
-             // +--------------+-------------+
-             // | campaign_id  | device      |
-             // +--------------+-------------+
-                {  10          , "MOBILE"    },
-                {  10          , "DESKTOP"   },
+                // +--------------+-------------+
+                // | campaign_id  | device      |
+                // +--------------+-------------+
+                {10, "MOBILE"},
+                {10, "DESKTOP"},
         };
 
         DataTableUtils.populateTable(jooq, DEVICES, DATA);
@@ -99,10 +100,10 @@ public class MultiLevelFetchingTest {
         DataTableUtils.createTable(jooq, ADGROUPS);
 
         final Object[][] DATA = {
-             // +-------+---------------+--------------+-----------------+
-             // | id    | campaign_id   | name         | default_bid     |
-             // +-------+---------------+--------------+-----------------+
-                { 500   ,  10           ,  "adgroup1"  ,  2              }
+                // +-------+---------------+--------------+-----------------+
+                // | id    | campaign_id   | name         | default_bid     |
+                // +-------+---------------+--------------+-----------------+
+                {500, 10, "adgroup1", 2}
         };
 
         DataTableUtils.populateTable(jooq, ADGROUPS, DATA);
@@ -111,11 +112,17 @@ public class MultiLevelFetchingTest {
 
     @Test
     public void testFetchingAdgroupAlongWithOtherEntities() {
-        CurrentEntityState adgroup = null; // TODO: [1] use PL query
+        CurrentEntityState adgroup =
+                plContext.select(AccountEntity.USER_NAME, CampaignEntity.DAILY_BUDGET, DeviceEntity.DEVICE)
+                        .from(AdgroupEntity.INSTANCE)
+                        .where(AdgroupEntity.ID.eq(500))
+                        .fetch()
+                        .get(0);
 
         assertThat(adgroup.get(AccountEntity.USER_NAME), is("Joker"));
         assertThat(adgroup.get(CampaignEntity.DAILY_BUDGET), is(1000));
-        assertThat(null /* TODO: [2] get the fetched devices */, contains(MOBILE, DESKTOP));
+        assertThat(adgroup.getMany(DeviceEntity.INSTANCE).stream()
+                .map(deviceEntityFieldsValueMap -> deviceEntityFieldsValueMap.get(DeviceEntity.DEVICE)),contains(MOBILE, DESKTOP));
     }
 
 }
