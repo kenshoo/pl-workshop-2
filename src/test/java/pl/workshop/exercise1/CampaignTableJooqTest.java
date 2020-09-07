@@ -5,6 +5,7 @@ import org.jooq.DSLContext;
 import org.junit.Test;
 import pl.workshop.campaign.CampaignTable;
 import pl.workshop.database.JooqProvider;
+
 import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -19,10 +20,6 @@ public class CampaignTableJooqTest {
 
     @Test
     public void testThatYouCanDefineCampaignTableFields() {
-
-        //
-        // TODO: go to class CampaignTable to define the expected table fields.
-        //
 
         DataTableUtils.createTable(jooq, CAMPAIGNS);
 
@@ -40,19 +37,12 @@ public class CampaignTableJooqTest {
     public void testThatYouCanInsertCampaignAndSelectIt() {
         DataTableUtils.createTable(jooq, CAMPAIGNS);
 
-        //
-        // TODO: use jooq to insert a new campaign with name "Tablets in USA" and type "ECOM"
-        //
+        jooq.insertInto(CAMPAIGNS, CampaignTable.name, CampaignTable.type).values("Tablets in USA", "ECOM").execute();
 
-        // jooq.insertInto(...) ...
-
-        //
-        // TODO: use jooq to fetch campaigns name and type into a map.
-        //
-        Map<String, String> nameToType = null; // TODO:  jooq.select(...)
+        Map<String, String> nameToType = jooq.select(CampaignTable.name, CampaignTable.type)
+                .from(CAMPAIGNS)
+                .fetchMap(CampaignTable.name, CampaignTable.type);
 
         assertThat(nameToType.get("Tablets in USA"), is(ECOM.name()));
     }
-
-
 }

@@ -9,20 +9,22 @@ public class CampaignBudgetTable extends AbstractDataTable<CampaignBudgetTable> 
 
     public final static CampaignBudgetTable INSTANCE = new CampaignBudgetTable("campaign_budgets");
 
-    CampaignBudgetTable(String tableName) { super(tableName); }
-    CampaignBudgetTable(CampaignBudgetTable aliased, String alias) { super(aliased, alias); }
-    @Override public CampaignBudgetTable as(String alias) { return new CampaignBudgetTable(this, alias); }
+    CampaignBudgetTable(String tableName) {
+        super(tableName);
+    }
 
+    CampaignBudgetTable(CampaignBudgetTable aliased, String alias) {
+        super(aliased, alias);
+    }
 
-    //
-    // TODO: define fields.
-    //
-    // Field campaign_id should be defined as a Foreign Key (FK) to the campaign table
-    // and Primary Key (PK) to the budget table..
-    // Do this by using method createPKAndFKField instead of using createField.
-    //
-    // public final static TableField<Record, ...> campaign_id = ...
-    // public final static TableField<Record, Integer> daily_budget = ...
-    // public final static TableField<Record, Integer> monthly_budget = ...
+    @Override
+    public CampaignBudgetTable as(String alias) {
+        return new CampaignBudgetTable(this, alias);
+    }
+
+    public final static TableField<Record, Integer> campaign_id = INSTANCE.createPKAndFKField("campaign_id", SQLDataType.INTEGER, CampaignTable.id);
+    public final static TableField<Record, Integer> daily_budget = INSTANCE.createField("daily_budget", SQLDataType.INTEGER);
+    public final static TableField<Record, Integer> monthly_budget = INSTANCE.createField("monthly_budget", SQLDataType.INTEGER);
+
 
 }

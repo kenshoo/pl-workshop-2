@@ -4,11 +4,15 @@ import com.kenshoo.jooq.DataTable;
 import com.kenshoo.pl.entity.AbstractEntityType;
 import com.kenshoo.pl.entity.EntityField;
 import com.kenshoo.pl.entity.converters.EnumAsStringValueConverter;
+import org.jooq.Converter;
 
 
 public class CampaignEntity extends AbstractEntityType<CampaignEntity> {
 
-    private CampaignEntity() { super("CampaignEntity"); }
+    private CampaignEntity() {
+        super("CampaignEntity");
+    }
+
     public static final CampaignEntity INSTANCE = new CampaignEntity();
 
     @Override
@@ -16,12 +20,12 @@ public class CampaignEntity extends AbstractEntityType<CampaignEntity> {
         return CampaignTable.INSTANCE;
     }
 
-    //
-    // TODO: add more fields in here.
-    //
     public final static EntityField<CampaignEntity, String> NAME = INSTANCE.field(CampaignTable.name);
-    public final static EntityField<CampaignEntity, CampaignType> TYPE = null; // TODO: define field type as enum by using EnumAsStringValueConverter
-    // public final static EntityField<CampaignEntity, ...> REPLACE_ME_1 = ...;
-    // public final static EntityField<CampaignEntity, ...> REPLACE_ME_2 = ...;
+    public final static EntityField<CampaignEntity, CampaignType> TYPE = INSTANCE.field(CampaignTable.type, new EnumAsStringValueConverter<>(CampaignType.class));
+    public final static EntityField<CampaignEntity, Integer> ID = INSTANCE.field(CampaignTable.id);
+    public final static EntityField<CampaignEntity, Integer> ACCOUNT_ID = INSTANCE.field(CampaignTable.accountId);
+    public final static EntityField<CampaignEntity, Integer> DAILY_BUDGET = INSTANCE.field(CampaignBudgetTable.daily_budget);
+    public final static EntityField<CampaignEntity, Integer> MONTHLY_BUDGET = INSTANCE.field(CampaignBudgetTable.monthly_budget);
+    public final static EntityField<CampaignEntity, Integer> CAMPAIGN_ID = INSTANCE.field(CampaignBudgetTable.campaign_id);
 
 }
