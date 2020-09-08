@@ -15,16 +15,16 @@ public class CampaignPersistence {
     }
 
     private ChangeFlowConfig.Builder<CampaignEntity> flowBuilder() {
-        throw new UnsupportedOperationException("TODO: use ChangeFlowConfigBuilderFactory");
+        return ChangeFlowConfigBuilderFactory.newInstance(plContext, CampaignEntity.INSTANCE);
     }
 
     public CreateResult<CampaignEntity, Identifier<CampaignEntity>> create(Collection<CreateEntityCommand<CampaignEntity>> commands) {
-        throw new UnsupportedOperationException("TODO: use pl and flowBuilder");
+        return pl.create(commands,flowBuilder().build());
     }
 
     public <ID extends Identifier<CampaignEntity>>
     UpdateResult<CampaignEntity, ID> update(Collection<UpdateEntityCommand<CampaignEntity, ID>> commands) {
-        throw new UnsupportedOperationException("TODO: use pl and flowBuilder");
+        return pl.update(commands,flowBuilder().build());
     }
 
 }

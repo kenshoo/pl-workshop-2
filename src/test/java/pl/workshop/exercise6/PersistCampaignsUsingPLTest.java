@@ -9,6 +9,7 @@ import pl.workshop.account.AccountTable;
 import pl.workshop.campaign.*;
 import pl.workshop.database.JooqProvider;
 
+import javax.print.attribute.standard.MediaSize;
 import java.util.List;
 import java.util.Map;
 
@@ -33,10 +34,10 @@ public class PersistCampaignsUsingPLTest {
         DataTableUtils.createTable(jooq, ACCOUNTS);
 
         final Object[][] DATA = {
-             // +------+--------------+-----------+
-             // | id   | user_name    | status    |
-             // +------+--------------+-----------+
-                {  1   ,  "Joker"     , "ACTIVE"  }
+                // +------+--------------+-----------+
+                // | id   | user_name    | status    |
+                // +------+--------------+-----------+
+                {1, "Joker", "ACTIVE"}
         };
 
         DataTableUtils.populateTable(jooq, ACCOUNTS, DATA);
@@ -48,10 +49,10 @@ public class PersistCampaignsUsingPLTest {
         DataTableUtils.createTable(jooq, BUDGETS);
 
         final Object[][] DATA = {
-              // +------+--------------+-----------+----------+
-              // | id   | account_id   | name      |  type    |
-              // +------+--------------+-----------+----------+
-                {  10  ,  1           , "shoes"   , "SEARCH" }
+                // +------+--------------+-----------+----------+
+                // | id   | account_id   | name      |  type    |
+                // +------+--------------+-----------+----------+
+                {10, 1, "shoes", "SEARCH"}
         };
 
         DataTableUtils.populateTable(jooq, CAMPAIGNS, DATA);
@@ -61,23 +62,21 @@ public class PersistCampaignsUsingPLTest {
     @Test
     public void testCreatingNewCampaigns() {
 
-        // TODO: [1] implement missing methods in CampaignPersistence
         var campaignPL = new CampaignPersistence(plContext);
 
         var command1 = new CreateEntityCommand<>(CampaignEntity.INSTANCE);
         var command2 = new CreateEntityCommand<>(CampaignEntity.INSTANCE);
 
-        /* TODO: [2] populate with values
-        command1.set(...);
-        command1.set(...);
-        command1.set(...);
-        command1.set(...);
+        command1.set(NAME, "TV Japan");
+        command1.set(ACCOUNT_ID, 1);
+        command1.set(TYPE, SEARCH);
+        command1.set(DAILY_BUDGET, 400);
 
-        command2.set(...);
-        command2.set(...);
-        command2.set(...);
-        command2.set(...);
-        */
+        command2.set(NAME, "TV Dublin");
+        command2.set(ACCOUNT_ID, 1);
+        command2.set(TYPE, SEARCH);
+        command2.set(DAILY_BUDGET, 1600);
+
 
         campaignPL.create(List.of(command1, command2));
 
@@ -110,7 +109,11 @@ public class PersistCampaignsUsingPLTest {
 
         var campaignPL = new CampaignPersistence(plContext);
 
-        // TODO: [1] Create a new CampaignNameAndAccount class similar to CampaignId (but use PairUniqueKeyValue).
+        var command = new UpdateEntityCommand<>(CampaignEntity.INSTANCE, new PairUniqueKeyValue<>(ACCOUNT_ID, NAME, 1, "shoes"));
+        command.set(DAILY_BUDGET, 8080);
+
+        campaignPL.update(List.of(command));
+
         // TODO: [2] Create and execute an updated command using CampaignNameAndAccount as the identifier.
 
         assertThat(fetchAllCampaignsByNames().get("shoes").get(DAILY_BUDGET), is(8080));
