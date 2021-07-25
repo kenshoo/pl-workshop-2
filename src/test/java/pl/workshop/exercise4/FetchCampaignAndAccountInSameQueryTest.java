@@ -15,7 +15,6 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static pl.workshop.utils.SyntacticSugars.first;
-import static pl.workshop.matchers.StreamMatcher.contains;
 
 
 public class FetchCampaignAndAccountInSameQueryTest {
@@ -73,24 +72,6 @@ public class FetchCampaignAndAccountInSameQueryTest {
         assertThat(first(campaigns).get(CampaignEntity.NAME), is("shoes"));
         // TODO: [3] uncomment this lines
         //assertThat(first(campaigns).get(AccountEntity.USER_NAME), is("Joker"));
-    }
-
-
-    @Test
-    public void testFetchingAccountWithManyCampaigns() {
-
-        List<CurrentEntityState> accounts = null; /* TODO: [1] replace 'null' with the query:
-        /*
-                plContext
-                        .select(... campaign name and account user name ...)
-                        .from  (... accounts ...)
-                        .where (... account id is 1 ...)
-                        .fetch ();
-        */
-
-        // TODO: [2] uncomment this line
-        // assertThat(first(accounts).get(AccountEntity.USER_NAME), is("Joker"));
-        assertThat(first(accounts).getMany(CampaignEntity.INSTANCE).stream().map(c -> c.get(CampaignEntity.NAME)), contains("shoes", "shirts"));
     }
 
 }
